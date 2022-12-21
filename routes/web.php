@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Laundry_control;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
 });
+Route::get("/create-laundry", [Laundry_control::class,'create']);
+Route::get("/store-laundry", [Laundry_control::class,'store']);
