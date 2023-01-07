@@ -18,6 +18,10 @@ class laundromat extends Model
         "Tgl_Keluar",
         "Bayar",
         "DP",
-        "Tgl_Ambil",
+        "Tgl_Ambil"
     ];
+    public function category()
+    {
+        return $this->hasOne(categories::class);
+    }
 }

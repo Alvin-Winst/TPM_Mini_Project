@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('laundromats', function (Blueprint $table) {
-            $table->id("No_Bon");
+            $table->string("No_Bon");
             $table->string("Nama");
             $table->double("Berat",$precision=3,$scale=1);
             $table->integer("Harga_Satuan");
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date("Tgl_Keluar");
             $table->boolean("Bayar");
             $table->integer("DP");
-            $table->date("Tgl_Ambil");
+            $table->date("Tgl_Ambil")->nullable();
             $table->timestamps();
         });
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\laundromat;
+use App\Models\categories;
 use Illuminate\Http\Request;
 
-class Laundry_control extends Controller
+class LaundCat_control extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class Laundry_control extends Controller
      */
     public function index()
     {
-        $laundromat = laundromat::all();
-        return view('welcome', compact('laundromat'));
+        $categories = categories::all();
+        return view('welcome', compact('categories'));
     }
 
     /**
@@ -25,7 +25,7 @@ class Laundry_control extends Controller
      */
     public function create()
     {
-        return view('createLaundry');
+        //
     }
 
     /**
@@ -36,30 +36,7 @@ class Laundry_control extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'Bon' => 'required|regex:/(^([0-9]+)$)/u|digits:6|unique',
-            'Nama' => 'required',
-            'Berat' => 'numeric|required|min:1',
-            'Harga_Satuan' => 'required|min:1000',
-            'Harga_Total' => 'required|min:1000',
-            'Tgl_Masuk' => 'date|required',
-            'Tgl_Keluar' => 'date|required|after_or_equal:Tgl_Masuk',
-            'DP' => 'required|numeric|min:1000|max:Harga_Total-1',
-            'Tgl_Ambil' => 'date|after_or_equal:Tgl_Keluar|nullable',
-        ]);
-        laundromat::create([
-            "No_Bon" => $request->Bon,
-            "Nama" => $request->Nama,
-            "Berat" => $request->Berat,
-            "Harga_Satuan" => $request->Harga_Satuan,
-            "Harga_Total"=> $request->Harga_Total,
-            "Tgl_Masuk" => $request->Tgl_Masuk,
-            "Tgl_Keluar" => $request->Tgl_Keluar,
-            "Bayar" => $request->Bayar,
-            "DP" => $request->DP,
-            "Tgl_Ambil" => $request->Tgl_Ambil
-        ]);
-        return redirect('/home');
+        //
     }
 
     /**
@@ -81,7 +58,7 @@ class Laundry_control extends Controller
      */
     public function edit($id)
     {
-        return view('editLaundry');
+        //
     }
 
     /**

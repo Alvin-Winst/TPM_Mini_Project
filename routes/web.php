@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('welcome');
-});
+Route::get('/home', [Laundry_control::class, 'index']);
 Route::get("/create-laundry", [Laundry_control::class,'create']);
-Route::get("/store-laundry", [Laundry_control::class,'store']);
+Route::post("/store-laundry", [Laundry_control::class,'store']);
