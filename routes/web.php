@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\LaundCat_control;
 use App\Http\Controllers\Laundry_control;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/home', [Laundry_control::class, 'index']);
-Route::get("/create-laundry", [Laundry_control::class,'create']);
-Route::post("/store-laundry", [Laundry_control::class,'store']);
+Route::get('/create-laundry', [Laundry_control::class,'create'])->name('create');
+Route::post('/store-laundry', [Laundry_control::class,'store']);
+Route::get('/edit-laundry/{id}', [Laundry_control::class, 'edit'])->name('edit');
+Route::patch('/update-laundry/{id}', [Laundry_control::class, 'update']);
+Route::delete('/delete-book/{id}', [Laundry_control::class, 'destroy']);
+Route::get('/create-list',[LaundCat_control::class,'create'])->name('create-list');
+Route::post('/store-list', [LaundCat_control::class, 'store']);

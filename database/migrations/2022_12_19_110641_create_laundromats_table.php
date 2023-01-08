@@ -14,15 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('laundromats', function (Blueprint $table) {
-            $table->string("No_Bon");
+            $table->id("No_Bon");
             $table->string("Nama");
             $table->double("Berat",$precision=3,$scale=1);
             $table->integer("Harga_Satuan");
             $table->integer("Harga_Total");
             $table->date("Tgl_Masuk");
             $table->date("Tgl_Keluar");
-            $table->boolean("Bayar");
-            $table->integer("DP");
+            $table->integer("DP")->nullable();
             $table->date("Tgl_Ambil")->nullable();
             $table->timestamps();
         });

@@ -37,25 +37,27 @@ class Laundry_control extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'Bon' => 'required|regex:/(^([0-9]+)$)/u|digits:6|unique',
+            'No_Bon' => 'required|integer|digits_between:1,6|unique:laundromats',
             'Nama' => 'required',
-            'Berat' => 'numeric|required|min:1',
-            'Harga_Satuan' => 'required|min:1000',
-            'Harga_Total' => 'required|min:1000',
+            'Berat' => 'integer|required|min:1',
+            'Harga_Satuan' => 'integer|required|min:1000',
             'Tgl_Masuk' => 'date|required',
             'Tgl_Keluar' => 'date|required|after_or_equal:Tgl_Masuk',
-            'DP' => 'required|numeric|min:1000|max:Harga_Total-1',
+            'DP' => 'integer|min:1000|max:Harga_Total|nullable',
             'Tgl_Ambil' => 'date|after_or_equal:Tgl_Keluar|nullable',
         ]);
+
+        $berat = $request->Berat;
+        $harga_sat = $request->Harga_Satuan;
+
         laundromat::create([
-            "No_Bon" => $request->Bon,
+            "No_Bon" => $request->No_Bon,
             "Nama" => $request->Nama,
             "Berat" => $request->Berat,
             "Harga_Satuan" => $request->Harga_Satuan,
-            "Harga_Total"=> $request->Harga_Total,
+            "Harga_Total"=> $berat*$harga_sat,
             "Tgl_Masuk" => $request->Tgl_Masuk,
             "Tgl_Keluar" => $request->Tgl_Keluar,
-            "Bayar" => $request->Bayar,
             "DP" => $request->DP,
             "Tgl_Ambil" => $request->Tgl_Ambil
         ]);
@@ -70,7 +72,8 @@ class Laundry_control extends Controller
      */
     public function show($id)
     {
-        //
+        $laundry = laundromat.No_Bon::findOrFail($id);
+        return view('detailLaundry', compact('laundromat'));
     }
 
     /**
@@ -81,7 +84,8 @@ class Laundry_control extends Controller
      */
     public function edit($id)
     {
-        return view('editLaundry');
+        $laundry = laundromat.No_Bon::findOrFail($id);
+        return view('editLaundry',compact('laundromat'));
     }
 
     /**
@@ -93,7 +97,32 @@ class Laundry_control extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'No_Bon' => 'required|integer|digits_between:1,6|unique:laundromats',
+            'Nama' => 'required',
+            'Berat' => 'integer|required|min:1',
+            'Harga_Satuan' => 'integer|required|min:1000',
+            'Tgl_Masuk' => 'date|required',
+            'Tgl_Keluar' => 'date|required|after_or_equal:Tgl_Masuk',
+            'DP' => 'integer|min:1000|max:Harga_Total|nullable',
+            'Tgl_Ambil' => 'date|after_or_equal:Tgl_Keluar|nullable',
+        ]);
+
+        $berat = $request->Berat;
+        $harga_sat = $request->Harga_Satuan;
+
+        laundromat.No_Bon::findOrFail($id)->update([
+            "No_Bon" => $request->No_Bon,
+            "Nama" => $request->Nama,
+            "Berat" => $request->Berat,
+            "Harga_Satuan" => $request->Harga_Satuan,
+            "Harga_Total"=> $berat*$harga_sat,
+            "Tgl_Masuk" => $request->Tgl_Masuk,
+            "Tgl_Keluar" => $request->Tgl_Keluar,
+            "DP" => $request->DP,
+            "Tgl_Ambil" => $request->Tgl_Ambil
+        ]);
+        return redirect('/home');
     }
 
     /**
@@ -104,6 +133,7 @@ class Laundry_control extends Controller
      */
     public function destroy($id)
     {
-        //
+        laundromat.No_Bon::destroy($id);
+        return redirect('/home');
     }
 }

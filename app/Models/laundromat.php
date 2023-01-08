@@ -16,7 +16,6 @@ class laundromat extends Model
         "Harga_Total",
         "Tgl_Masuk",
         "Tgl_Keluar",
-        "Bayar",
         "DP",
         "Tgl_Ambil"
     ];

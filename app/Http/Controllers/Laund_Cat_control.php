@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\categories;
 use Illuminate\Http\Request;
 
-class LaundCat_control extends Controller
+class Category_control extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class LaundCat_control extends Controller
      */
     public function index()
     {
-        $categories = categories::all();
-        return view('welcome', compact('categories'));
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class LaundCat_control extends Controller
      */
     public function create()
     {
-        return view('createLCategory');
+        //
     }
 
     /**
@@ -36,22 +34,7 @@ class LaundCat_control extends Controller
      */
     public function store(Request $request)
     {
-        $extension = $request->file('Bukti')->getClientOriginalExtension();
-        $filename = $request->Bon.'.'.$extension;
-        $request->file('Bukti')->storeAs('/public/Bukti/',$filename);
-
-        $validated = $request->validate([
-            'Bon' => 'required|integer|digits_between:1,6|unique:categories',
-            'List_Laund' => 'required',
-            'Bukti' => 'required|mimes:jpg,jpeg,png'
-        ]);
-
-        categories::create([
-            'Bon' => $request->Bon,
-            'List_Barang' => $request->List_Laund,
-            'Bukti' => $filename
-        ]);
-        return redirect('/home');
+        //
     }
 
     /**

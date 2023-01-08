@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('No_Bon');
+            $table->unsignedBigInteger('Bon');
             $table->multiLineString('List_Barang');
+            $table->string('Bukti');
 
-            $table->foreign('No_Bon')->references('No_Bon')->on('laundromat');
+            $table->foreign('Bon')->references('No_Bon')->on('laundromats');
             $table->timestamps();
         });
     }

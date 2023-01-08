@@ -9,8 +9,9 @@ class categories extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "No_Bon",
-        "List_Barang"
+        "Bon",
+        "List_Barang",
+        "Bukti"
     ];
 
     public function laundromats()

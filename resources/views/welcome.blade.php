@@ -55,18 +55,30 @@
         <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
+                <h5 class="card-title">{{$laundry->No_Bon}}</h5>
                 <h5 class="card-title">{{$laundry->Nama}}</h5>
-                <p class="card-text">{{$laundry->Berat}}</p>
-                <p class="card-text">{{$laundry->Harga_Satuan}}</p>
-                <p class="card-text">{{$laundry->Tgl_Masuk}}</p>
-                <p class="card-text">{{$laundry->Tgl_Keluar}}</p>
-                <p class="card-text">{{$laundry->Bayar}}</p>
-                <p class="card-text">{{$laundry->DP}}</p>
-                <p class="card-text">{{$laundry->Tgl_Ambil}}</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <p class="card-text">Berat: {{$laundry->Berat}}</p>
+                <p class="card-text">Harga per Kg: {{$laundry->Harga_Satuan}}</p>
+                <p class="card-text">Harga Total: {{$laundry->Harga_Total}}</p>
+                <p class="card-text">Tanggal Masuk: {{$laundry->Tgl_Masuk}}</p>
+                <p class="card-text">Tanggal Keluar: {{$laundry->Tgl_Keluar}}</p>
+                <p class="card-text">Sudah Membayar: {{$laundry->DP}}</p>
+                <p class="card-text">Tanggal Ambil: {{$laundry->Tgl_Ambil}}</p>
+                <a href="#" class="btn btn-primary">Detail Laundry</a>
+                <a href="{{route('edit',$laundry->No_Bon)}}" class="btn btn-warning">Edit</a>
+                <form action="/delete-laundry/{{$laundry->No_Bon}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     @endforeach
+
+    <div>
+        <a href="{{route('create')}}" class="btn btn-success">Buat Data Baru</a>
+        <a href="{{route('create-list')}}" class="btn btn-success">Buat Detail Laundry</a>
+    </div>
   
 {{-- {{$i =1}}
 @if($i>0)
